@@ -149,6 +149,10 @@ In C, the initial thread executes `main()`. If `main()` reaches `return 0;`:
 - Any background worker threads are violently terminated mid-instruction, potentially corrupting files or memory state.
 - `pthread_join` is the barrier that prevents `main()` from exiting before its workers finish.
 
+> [!TIP]
+> For a full visual breakdown with OS-level diagrams and the zombie-thread scenario, see:
+> 📖 [[Deep_Dive_Without_Pthread_Join|Deep Dive: What Happens When You Don't Call pthread_join()?]]
+
 ---
 
 ### Pitfall C: Returning Local Stack Addresses

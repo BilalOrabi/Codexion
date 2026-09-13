@@ -22,6 +22,7 @@ Welcome to your Obsidian knowledge base for **Codexion** (42 School Concurrency 
 Foundational micro-experiments to master POSIX concurrency primitives in isolation before touching the main project.
 
 - [[01_Concurrency_Primitives|01. Concurrency Primitives (`pthread_create`, `pthread_join`)]] 📍 *(CURRENT)*
+  - [[Deep_Dive_Without_Pthread_Join|🔍 Deep Dive: What Happens When You Don't Call pthread_join()?]]
 - [[02_Mutexes_and_Critical_Sections|02. Race Conditions & Critical Sections (`pthread_mutex_*`)]]
 - [[03_Clocks_and_Precise_Timers|03. Precise Clocks & Drift-Free Sleep (`clock_gettime`, `gettimeofday`)]]
 - [[04_Condition_Variables|04. Condition Variables (`pthread_cond_*`, spurious wakeups)]]
