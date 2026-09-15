@@ -1,0 +1,54 @@
+# ==========================================
+# Codexion: 42 School .gitignore
+# ==========================================
+
+# Compiled Binaries & Executables
+*.exe
+*.out
+*.app
+a.out
+codexion
+lab*
+!*.c
+!*.h
+!*.md
+
+# Object & Library Files
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.dll
+
+# Debug Symbols & Compiler Artifacts
+*.pdb
+*.idb
+*.ilk
+*.exp
+*.dSYM/
+
+# Profiling, Valgrind & Sanitizer Logs
+valgrind-out.txt
+vgcore.*
+core
+core.*
+tsan.*
+asan.*
+
+# Temporary / Swap / Backup Files
+*~
+*.swp
+*.swo
+*.tmp
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archives
+*.tar
+*.tar.gz
+*.tar.xz
+*.zip
