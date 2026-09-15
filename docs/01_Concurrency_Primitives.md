@@ -8,7 +8,7 @@ tags:
   - 42school
   - codexion
 created: 2026-09-12
-status: in-progress
+status: completed
 module: "Phase 1: The Building Blocks Lab"
 ---
 
@@ -201,3 +201,11 @@ Build a multithreaded testbed without race conditions or memory leaks that demon
    - Clean up all allocated memory.
 10. Compilation flags: `cc -Wall -Wextra -Werror -pthread`
 11. Memory & thread check: zero leaks with Valgrind / zero races with `-fsanitize=thread`.
+
+---
+
+## 7. Deep Dives & Lessons Learned
+
+During the execution of this lab, two critical architectural deep-dives were documented:
+1. 📖 [[Deep_Dive_joining|Deep Dive: What Happens When You Don't Call pthread_join()?]] (Sudden death vs. zombie thread resource exhaustion)
+2. 📖 [[Deep_Dive_Pointers_Stack_Heap_Retval|Deep Dive: Pointers, Memory Architecture, and the &retval Trap]] (Pass-by-reference in C, `free(&retval)` compiler errors, pointer overwrite leaks, and `printf` interleaving)

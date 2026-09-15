@@ -9,6 +9,7 @@
   3. Guiding the student to diagnose bugs and memory issues without giving them the code.
   4. Senior engineering code reviews (evaluating 42 Norm, memory leaks, thread safety, deadlocks, and simplicity).
   5. Formally verifying understanding before allowing progression to subsequent phases.
+  6. **Continuous Knowledge Base Documentation**: Proactively document every core concept, systems pitfall, and architectural lesson in the `docs/` Obsidian vault (`Concepts_To_Revisit.md`, deep dives, and MOC) so the student can revisit them throughout the phases.
 
 ---
 
@@ -54,14 +55,37 @@
 ---
 
 ## 4. Master Roadmap & Current Progress
-- **Phase 1: The Building Blocks Lab**
-  - [ ] **Lesson 1: Concurrency Primitives (`pthread_create`, `pthread_join`)** 📍 *(CURRENT STATUS)*
-  - [ ] **Lesson 2: Race Conditions & Critical Sections (`pthread_mutex_*`)**
-  - [ ] **Lesson 3: Precise Clocks & Drift-Free Sleep (`clock_gettime`, `gettimeofday`)**
-  - [ ] **Lesson 4: Condition Variables (`pthread_cond_*`, spurious wakeups)**
-  - [ ] **Lesson 5: Min-Heap / Priority Queue from Scratch in C**
-- **Phase 2: The Prototype Simulator** (2-3 coders, cooldown, thread sanitizer, assessment gate)
-- **Phase 3: The Codexion Main Project** (Steps 1 through 9: Parsing, structs, arbitration, lifecycle, monitor, norm/leaks, Chapter 7 README)
+
+### Phase 1: The Building Blocks Lab
+- [x] **Lesson 1: Concurrency Primitives (`pthread_create`, `pthread_join`)**
+  - *Mastered: Thread lifecycles, private stack vs shared heap, double pointer `&retval`, zombie prevention.*
+- [ ] **Lesson 2: Race Conditions & Critical Sections (`pthread_mutex_*`)** 📍 *(CURRENT STATUS)*
+  - *Focus: Assembly data races (`counter++`), mutex initialization/locking/unlocking, deadlocks, serialized logging.*
+- [ ] **Lesson 3: Precise Clocks & Drift-Free Sleep (`clock_gettime`, `gettimeofday`)**
+  - *Focus: Eliminating `usleep` drift, millisecond timestamp calculation, real-time pacing.*
+- [ ] **Lesson 4: Condition Variables (`pthread_cond_*`, spurious wakeups)**
+  - *Focus: Event-driven thread waking, eliminating forbidden spinlocks, queue synchronization.*
+- [ ] **Lesson 5: Min-Heap / Priority Queue from Scratch in C**
+  - *Focus: Binary heap array representation, $O(\log N)$ insertion/extraction, tie-breaker handling without stdlib.*
+
+### Phase 2: The Prototype Simulator
+- [ ] **Lightweight Integration Sandbox**:
+  - Implement 2–3 coders competing for shared dongles.
+  - Implement mandatory `dongle_cooldown` timer logic.
+  - Verification Gate: Zero deadlocks with ThreadSanitizer (`-fsanitize=thread`) and Helgrind.
+
+### Phase 3: The Codexion Production Engine
+- [ ] **Step 1: CLI Argument Parsing & Overflow Validation** (Strict validation of all 8 mandatory arguments).
+- [ ] **Step 2: Core Data Architecture** (Global-free clean `t_engine` and struct hierarchy).
+- [ ] **Step 3: Deadlock-Free Dongle Arbitration** (Preventing Coffman circular wait conditions).
+- [ ] **Step 4: Scheduler Implementations** (`fifo` queue vs `edf` custom min-heap).
+- [ ] **Step 5: Coder State Machine Lifecycle** (`COMPILING`, `DEBUGGING`, `REFACTORING` state transitions).
+- [ ] **Step 6: Dedicated Real-Time Burnout Monitor** (Background monitor thread with `< 10ms` alert precision).
+- [ ] **Step 7: Final Submission Audit**:
+  - `norminette` compliance (100% clean formatting, no forbidden functions).
+  - Valgrind memory leak verification (0 bytes lost).
+  - ThreadSanitizer stress test under heavy concurrency (e.g. 200 coders).
+
 
 ---
 
