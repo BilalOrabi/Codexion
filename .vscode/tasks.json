@@ -42,6 +42,23 @@
                 "isDefault": true
             },
             "detail": "Runs the compiled executable inside Ubuntu WSL"
+        },
+        {
+            "type": "shell",
+            "label": "42: TSAN ThreadSanitizer (WSL)",
+            "command": "wsl",
+            "args": [
+                "bash",
+                "-c",
+                "cc -Wall -Wextra -Werror -pthread -fsanitize=thread ${fileBasename} -o ${fileBasenameNoExtension}_tsan.out && ./${fileBasenameNoExtension}_tsan.out && rm -f ${fileBasenameNoExtension}_tsan.out"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Compiles and runs active file with ThreadSanitizer inside Ubuntu WSL"
         }
     ]
 }
