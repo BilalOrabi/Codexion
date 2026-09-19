@@ -8,6 +8,8 @@
 *.app
 a.out
 codexion
+lab*
+!lab*.c
 !*.c
 !*.h
 !*.md

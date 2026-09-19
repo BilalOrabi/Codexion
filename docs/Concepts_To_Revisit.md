@@ -32,6 +32,9 @@ As we advance through the phases toward final submission, this document acts as 
 | **08** | **Thread Array Bounds & Stack Overflows** | An array of size $N$ (`threads[N]`) has valid indices $0$ to $N-1$. Using `i <= N` overflows the stack and writes an extra handle into arbitrary stack memory. | 📍 **Phase 2 & Phase 3, Step 2**: Ring initialization for $N$ coders and dongles. Loop bounds must be strictly `i < N`. |
 | **09** | **Mutex Fast Path vs. Futex Slow Path** | Uncontended mutexes lock in user space via `LOCK CMPXCHG` (~15ns); contended locks invoke `sys_futex` to sleep in the kernel (0% CPU). Long locks cause cache line bouncing. | 📍 **Phase 2 & Phase 3, Step 3**: Dongle arbitration. Critical sections must be strictly minimized (never sleep or I/O inside dongle locks). |
 | **10** | **Dot (`.`) vs. Arrow (`->`) Operator** | Dot accesses direct objects (`data.counter`); Arrow accesses pointers (`ptr->counter`), serving as shorthand for `(*ptr).counter`. | 📍 **Phase 2 & Phase 3 (Throughout)**: Navigating nested structures: `engine->coders[i].id` or `coder->left_dongle->is_taken`. |
+| **11** | **`usleep` Quantization Drift** | `usleep(t)` guarantees only a lower bound; OS quantum scheduling accumulates drift. Solved by closed-loop verification against a wall clock. | 📍 **Phase 2 & Phase 3, Step 5 & 6**: Pacing coder states (`COMPILING`, `DEBUGGING`, `REFACTORING`) and burnout detection without failing the `< 10ms` spec. |
+| **12** | **64-bit Integer Overflow Protection** | Signed 32-bit `int` overflows in ~35 minutes if storing microseconds ($2^{31}-1 \approx 2.147 \times 10^9$). Timestamp calculations must use `long long` and `1000LL`. | 📍 **Phase 3, Step 2, 5 & 6**: All struct timestamp fields (`last_compile_start`, `burnout_deadline`, `start_time`) must be 64-bit integers. |
+| **13** | **Hybrid Yielding vs. Spinlock Waste** | An empty `while (elapsed < duration);` burns 100% CPU core and starves other threads. Inserting `usleep(500)` yields the CPU timeslice to the OS while maintaining sub-millisecond precision. | 📍 **Phase 2 & Phase 3, Step 5 & 6**: Custom `ft_usleep` engine used across all simulation worker and monitor threads. |
 
 ---
 
@@ -47,6 +50,9 @@ graph TD
         C5["Output Splicing & Mutex Logging"]
         C6["Data Races (counter++)"]
         C7["Deadlocks & Lock Ordering"]
+        C11["usleep Drift & Closed-Loop Clock"]
+        C12["64-bit Overflow & 1000LL"]
+        C13["Hybrid Sleep (usleep 500)"]
     end
 
     subgraph Phase2["Phase 2: Prototype Simulator"]
@@ -73,6 +79,13 @@ graph TD
     C6 --> S3
     C7 --> P2_1
     C7 --> S3
+    C11 --> P2_2
+    C11 --> S5
+    C11 --> S6
+    C12 --> S2
+    C12 --> S6
+    C13 --> S5
+    C13 --> S6
 ```
 
 ---

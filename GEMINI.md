@@ -61,9 +61,9 @@
   - *Mastered: Thread lifecycles, private stack vs shared heap, double pointer `&retval`, zombie prevention.*
 - [x] **Lesson 2: Race Conditions & Critical Sections (`pthread_mutex_*`)**
   - *Mastered: Assembly data races (`counter++`), mutex initialization/locking/unlocking, deadlocks, user-space fast path vs kernel futex slow path.*
-- [ ] **Lesson 3: Precise Clocks & Drift-Free Sleep (`clock_gettime`, `gettimeofday`)** 📍 *(CURRENT STATUS)*
-  - *Focus: Eliminating `usleep` drift, millisecond timestamp calculation, real-time pacing.*
-- [ ] **Lesson 4: Condition Variables (`pthread_cond_*`, spurious wakeups)**
+- [x] **Lesson 3: Precise Clocks & Drift-Free Sleep (`clock_gettime`, `gettimeofday`)**
+  - *Mastered: Eliminating `usleep` drift, millisecond timestamp calculation, 64-bit overflow prevention, hybrid yielding sleep.*
+- [ ] **Lesson 4: Condition Variables (`pthread_cond_*`, spurious wakeups)** 📍 *(CURRENT STATUS)*
   - *Focus: Event-driven thread waking, eliminating forbidden spinlocks, queue synchronization.*
 - [ ] **Lesson 5: Min-Heap / Priority Queue from Scratch in C**
   - *Focus: Binary heap array representation, $O(\log N)$ insertion/extraction, tie-breaker handling without stdlib.*
