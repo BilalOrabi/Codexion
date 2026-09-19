@@ -65,10 +65,10 @@
   - *Mastered: Eliminating `usleep` drift, millisecond timestamp calculation, 64-bit overflow prevention, hybrid yielding sleep.*
 - [x] **Lesson 4: Condition Variables (`pthread_cond_*`, spurious wakeups)**
   - *Mastered: Event-driven thread waking, kernel wait queues, eliminating spinlocks, spurious wakeups.*
-- [ ] **Lesson 5: Min-Heap / Priority Queue from Scratch in C** 📍 *(CURRENT STATUS)*
-  - *Focus: Binary heap array representation, $O(\log N)$ insertion/extraction, tie-breaker handling without stdlib.*
+- [x] **Lesson 5: Min-Heap / Priority Queue from Scratch in C**
+  - *Mastered: Binary heap array representation, $O(\log N)$ insertion/extraction, deterministic tie-breaker handling without stdlib.*
 
-### Phase 2: The Prototype Simulator
+### Phase 2: The Prototype Simulator 📍 *(CURRENT STATUS)*
 - [ ] **Lightweight Integration Sandbox**:
   - Implement 2–3 coders competing for shared dongles.
   - Implement mandatory `dongle_cooldown` timer logic.
