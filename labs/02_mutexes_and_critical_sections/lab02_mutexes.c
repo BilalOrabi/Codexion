@@ -7,6 +7,7 @@
 typedef struct s_data
 {
 	int counter;
+    pthread_mutex_t lock;
 } t_data;
 
 void *increment_routine(void *arg)
@@ -16,7 +17,9 @@ void *increment_routine(void *arg)
 
 	while (i < 100000)
 	{
+        pthread_mutex_lock(&data->lock);
 		data->counter++;
+        pthread_mutex_unlock(&data->lock);
 		i++;
 	}
 	return NULL;
@@ -30,7 +33,8 @@ int main(void)
 	data.counter = 0;
 	int i = 0;
 
-	while (i < 4)
+    pthread_mutex_init(&data.lock, NULL);
+	while(i < 4)
 	{
 		pthread_create(&threads[i], NULL, increment_routine, (void *)&data);
 		i++;
@@ -41,6 +45,7 @@ int main(void)
 		pthread_join(threads[i], NULL);
 		i++;
 	}
+    pthread_mutex_destroy(&data.lock);
 	printf("Final counter: %d (Expected: 400000)\n", data.counter);
 	return (0);
 }

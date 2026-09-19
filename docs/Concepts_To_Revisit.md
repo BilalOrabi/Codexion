@@ -30,6 +30,7 @@ As we advance through the phases toward final submission, this document acts as 
 | **06** | **Atomic Read-Modify-Write** | `counter++` is 3 assembly instructions (Load, Add, Store). Without mutual exclusion, simultaneous writes obliterate data (Data Race). | 📍 **Phase 2 & Phase 3, Step 3**: Managing dongle states (`is_taken`, `cooldown_until`) and coder meal/compile counts without race conditions. |
 | **07** | **Deadlocks & Self-Deadlocks** | Locking an already-locked non-recursive mutex puts the thread to sleep waiting for itself, permanently freezing the process. | 📍 **Phase 2 & Phase 3, Step 3**: Preventing Coffman Circular Wait when two coders pick up adjacent dongles in conflicting order. |
 | **08** | **Thread Array Bounds & Stack Overflows** | An array of size $N$ (`threads[N]`) has valid indices $0$ to $N-1$. Using `i <= N` overflows the stack and writes an extra handle into arbitrary stack memory. | 📍 **Phase 2 & Phase 3, Step 2**: Ring initialization for $N$ coders and dongles. Loop bounds must be strictly `i < N`. |
+| **09** | **Mutex Fast Path vs. Futex Slow Path** | Uncontended mutexes lock in user space via `LOCK CMPXCHG` (~15ns); contended locks invoke `sys_futex` to sleep in the kernel (0% CPU). Long locks cause cache line bouncing. | 📍 **Phase 2 & Phase 3, Step 3**: Dongle arbitration. Critical sections must be strictly minimized (never sleep or I/O inside dongle locks). |
 
 ---
 

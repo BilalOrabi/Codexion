@@ -28,8 +28,9 @@ Foundational micro-experiments to master POSIX concurrency primitives in isolati
 - [[01_Concurrency_Primitives|01. Concurrency Primitives (`pthread_create`, `pthread_join`)]] ✅
   - [[Deep_Dive_joining|🔍 Deep Dive: What Happens When You Don't Call pthread_join()?]]
   - [[Deep_Dive_Pointers_Stack_Heap_Retval|🔍 Deep Dive: Pointers, Memory Architecture, and the &retval Trap]]
-- [[02_Mutexes_and_Critical_Sections|02. Race Conditions & Critical Sections (`pthread_mutex_*`)]] 📍 *(CURRENT)*
-- [[03_Clocks_and_Precise_Timers|03. Precise Clocks & Drift-Free Sleep (`clock_gettime`, `gettimeofday`)]]
+- [[02_Mutexes_and_Critical_Sections|02. Race Conditions & Critical Sections (`pthread_mutex_*`)]] ✅
+  - [[Deep_Dive_Mutex_Internals|🔍 Deep Dive: Mutex Internals, CPU Assembly, and Linux Futexes]]
+- [[03_Clocks_and_Precise_Timers|03. Precise Clocks & Drift-Free Sleep (`clock_gettime`, `gettimeofday`)]] 📍 *(CURRENT)*
 - [[04_Condition_Variables|04. Condition Variables (`pthread_cond_*`, spurious wakeups)]]
 - [[05_Priority_Queue_Heap|05. Min-Heap / Priority Queue from Scratch in C]]
 

@@ -9,7 +9,7 @@ tags:
   - 42school
   - codexion
 created: 2026-09-15
-status: in-progress
+status: completed
 module: "Phase 1: The Building Blocks Lab"
 ---
 
@@ -147,3 +147,10 @@ Expose an unshielded data race using ThreadSanitizer, observe corrupted state, a
 5. Each thread performs a loop incrementing the shared counter $100,000$ times.
 6. **Part 1 (The Broken Version)**: Run without mutex. Observe that the final count is far below the expected $400,000$ and `-fsanitize=thread` detects a data race.
 7. **Part 2 (The Thread-Safe Version)**: Protect the increment with `pthread_mutex_lock` and `pthread_mutex_unlock`. Observe exact $400,000$ count and 0 sanitizer warnings.
+
+---
+
+## 7. Deep Dives & Lessons Learned
+
+During the execution of this lab, a critical systems deep-dive was documented:
+- 📖 [[Deep_Dive_Mutex_Internals|Deep Dive: Mutex Internals, CPU Assembly, and Linux Futexes]] (Where mutexes live, user-space fast path `LOCK CMPXCHG`, kernel slow path `sys_futex`, cache line bouncing, and comparison matrix)

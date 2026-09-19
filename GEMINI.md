@@ -59,9 +59,9 @@
 ### Phase 1: The Building Blocks Lab
 - [x] **Lesson 1: Concurrency Primitives (`pthread_create`, `pthread_join`)**
   - *Mastered: Thread lifecycles, private stack vs shared heap, double pointer `&retval`, zombie prevention.*
-- [ ] **Lesson 2: Race Conditions & Critical Sections (`pthread_mutex_*`)** 📍 *(CURRENT STATUS)*
-  - *Focus: Assembly data races (`counter++`), mutex initialization/locking/unlocking, deadlocks, serialized logging.*
-- [ ] **Lesson 3: Precise Clocks & Drift-Free Sleep (`clock_gettime`, `gettimeofday`)**
+- [x] **Lesson 2: Race Conditions & Critical Sections (`pthread_mutex_*`)**
+  - *Mastered: Assembly data races (`counter++`), mutex initialization/locking/unlocking, deadlocks, user-space fast path vs kernel futex slow path.*
+- [ ] **Lesson 3: Precise Clocks & Drift-Free Sleep (`clock_gettime`, `gettimeofday`)** 📍 *(CURRENT STATUS)*
   - *Focus: Eliminating `usleep` drift, millisecond timestamp calculation, real-time pacing.*
 - [ ] **Lesson 4: Condition Variables (`pthread_cond_*`, spurious wakeups)**
   - *Focus: Event-driven thread waking, eliminating forbidden spinlocks, queue synchronization.*
