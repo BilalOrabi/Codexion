@@ -63,9 +63,9 @@
   - *Mastered: Assembly data races (`counter++`), mutex initialization/locking/unlocking, deadlocks, user-space fast path vs kernel futex slow path.*
 - [x] **Lesson 3: Precise Clocks & Drift-Free Sleep (`clock_gettime`, `gettimeofday`)**
   - *Mastered: Eliminating `usleep` drift, millisecond timestamp calculation, 64-bit overflow prevention, hybrid yielding sleep.*
-- [ ] **Lesson 4: Condition Variables (`pthread_cond_*`, spurious wakeups)** 📍 *(CURRENT STATUS)*
-  - *Focus: Event-driven thread waking, eliminating forbidden spinlocks, queue synchronization.*
-- [ ] **Lesson 5: Min-Heap / Priority Queue from Scratch in C**
+- [x] **Lesson 4: Condition Variables (`pthread_cond_*`, spurious wakeups)**
+  - *Mastered: Event-driven thread waking, kernel wait queues, eliminating spinlocks, spurious wakeups.*
+- [ ] **Lesson 5: Min-Heap / Priority Queue from Scratch in C** 📍 *(CURRENT STATUS)*
   - *Focus: Binary heap array representation, $O(\log N)$ insertion/extraction, tie-breaker handling without stdlib.*
 
 ### Phase 2: The Prototype Simulator

@@ -35,6 +35,7 @@ As we advance through the phases toward final submission, this document acts as 
 | **11** | **`usleep` Quantization Drift** | `usleep(t)` guarantees only a lower bound; OS quantum scheduling accumulates drift. Solved by closed-loop verification against a wall clock. | 📍 **Phase 2 & Phase 3, Step 5 & 6**: Pacing coder states (`COMPILING`, `DEBUGGING`, `REFACTORING`) and burnout detection without failing the `< 10ms` spec. |
 | **12** | **64-bit Integer Overflow Protection** | Signed 32-bit `int` overflows in ~35 minutes if storing microseconds ($2^{31}-1 \approx 2.147 \times 10^9$). Timestamp calculations must use `long long` and `1000LL`. | 📍 **Phase 3, Step 2, 5 & 6**: All struct timestamp fields (`last_compile_start`, `burnout_deadline`, `start_time`) must be 64-bit integers. |
 | **13** | **Hybrid Yielding vs. Spinlock Waste** | An empty `while (elapsed < duration);` burns 100% CPU core and starves other threads. Inserting `usleep(500)` yields the CPU timeslice to the OS while maintaining sub-millisecond precision. | 📍 **Phase 2 & Phase 3, Step 5 & 6**: Custom `ft_usleep` engine used across all simulation worker and monitor threads. |
+| **14** | **Condition Variables & Atomic Re-lock** | `pthread_cond_wait(&cond, &mutex)` atomically unlocks mutex and puts thread to sleep on kernel wait queue (0% CPU). Re-acquires mutex before returning. Canonical `while (condition)` loop defends against spurious wakeups and stolen resources. | 📍 **Phase 2 & Phase 3, Step 3 & 4**: Dongle queue notification and scheduler request dispatching without busy-waiting. |
 
 ---
 
@@ -53,6 +54,7 @@ graph TD
         C11["usleep Drift & Closed-Loop Clock"]
         C12["64-bit Overflow & 1000LL"]
         C13["Hybrid Sleep (usleep 500)"]
+        C14["Condition Variables & While Pattern"]
     end
 
     subgraph Phase2["Phase 2: Prototype Simulator"]
@@ -63,6 +65,7 @@ graph TD
     subgraph Phase3["Phase 3: Production Engine"]
         S2["Step 2: Struct Architecture (t_engine)"]
         S3["Step 3: Deadlock-Free Dongle Ring"]
+        S4["Step 4: Custom Schedulers (FIFO vs EDF)"]
         S5["Step 5: Coder State Machine Lifecycle"]
         S6["Step 6: Burnout Monitor (< 10ms Precision)"]
         S7["Step 7: Valgrind & TSAN Audit"]
@@ -86,6 +89,9 @@ graph TD
     C12 --> S6
     C13 --> S5
     C13 --> S6
+    C14 --> P2_1
+    C14 --> S3
+    C14 --> S4
 ```
 
 ---
