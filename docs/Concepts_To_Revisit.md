@@ -36,7 +36,7 @@ As we advance through the phases toward final submission, this document acts as 
 | **12** | **64-bit Integer Overflow Protection** | Signed 32-bit `int` overflows in ~35 minutes if storing microseconds ($2^{31}-1 \approx 2.147 \times 10^9$). Timestamp calculations must use `long long` and `1000LL`. | 📍 **Phase 3, Step 2, 5 & 6**: All struct timestamp fields (`last_compile_start`, `burnout_deadline`, `start_time`) must be 64-bit integers. |
 | **13** | **Hybrid Yielding vs. Spinlock Waste** | An empty `while (elapsed < duration);` burns 100% CPU core and starves other threads. Inserting `usleep(500)` yields the CPU timeslice to the OS while maintaining sub-millisecond precision. | 📍 **Phase 2 & Phase 3, Step 5 & 6**: Custom `ft_usleep` engine used across all simulation worker and monitor threads. |
 | **14** | **Condition Variables & Atomic Re-lock** | `pthread_cond_wait(&cond, &mutex)` atomically unlocks mutex and puts thread to sleep on kernel wait queue (0% CPU). Re-acquires mutex before returning. Canonical `while (condition)` loop defends against spurious wakeups and stolen resources. | 📍 **Phase 2 & Phase 3, Step 3 & 4**: Dongle queue notification and scheduler request dispatching without busy-waiting. |
-| **15** | **Binary Min-Heap & Deterministic Priority Queue** | Complete binary tree represented in contiguous array without pointers (`parent = (i-1)/2`, `left = 2*i+1`). $O(1)$ peek, $O(\log N)$ push (sift-up) and pop (sift-down). Deterministic tie-breaker (`deadline_A == deadline_B -> id_A < id_B`). Loop boundary strictly checks left child existence (`2*i+1 < size`). | 📍 **Phase 3, Step 4**: The `edf` (Earliest Deadline First) scheduler. Serves coders closest to burnout with zero starvation and zero external libraries. |
+| **15** | **Binary Min-Heap Array Arithmetic & Deterministic Tie-Breaker** | Complete binary tree mapped to flat array: parent `(i-1)/2`, children `2*i+1` & `2*i+2`. $O(\log N)$ push/pop via sift-up and sift-down without node pointers. Identical deadlines resolved deterministically by lower `coder_id`. | 📍 **Phase 3, Step 4**: Implementing the custom `edf` (Earliest Deadline First) request scheduler from scratch. |
 
 ---
 
@@ -56,6 +56,7 @@ graph TD
         C12["64-bit Overflow & 1000LL"]
         C13["Hybrid Sleep (usleep 500)"]
         C14["Condition Variables & While Pattern"]
+        C15["Min-Heap Array & EDF Tie-Breaker"]
     end
 
     subgraph Phase2["Phase 2: Prototype Simulator"]
@@ -93,6 +94,7 @@ graph TD
     C14 --> P2_1
     C14 --> S3
     C14 --> S4
+    C15 --> S4
 ```
 
 ---

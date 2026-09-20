@@ -8,7 +8,7 @@ tags:
   - 42school
   - codexion
 created: 2026-09-19
-status: in-progress
+status: completed
 module: "Phase 1: The Building Blocks Lab"
 ---
 

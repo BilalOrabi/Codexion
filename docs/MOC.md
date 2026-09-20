@@ -33,11 +33,11 @@ Foundational micro-experiments to master POSIX concurrency primitives in isolati
 - [[03_Clocks_and_Precise_Timers|03. Precise Clocks & Drift-Free Sleep (`clock_gettime`, `gettimeofday`)]] ✅
 - [[04_Condition_Variables|04. Condition Variables (`pthread_cond_*`, spurious wakeups)]] ✅
   - [[Deep_Dive_CPU_Kernel_Sleep_and_Futex|🔍 Deep Dive: CPU Cycles, Kernel Sleep, and Linux Futexes]]
-- [[05_Priority_Queue_Heap|05. Min-Heap / Priority Queue from Scratch in C]] 📍 *(CURRENT)*
+- [[05_Priority_Queue_Heap|05. Min-Heap / Priority Queue from Scratch in C]] ✅
 
 ---
 
-### Phase 2: The Prototype Simulator
+### Phase 2: The Prototype Simulator 📍 *(CURRENT)*
 Small-scale integration sandbox (2–3 coders, dongle cooldowns, thread sanitizers).
 
 - [[Phase2_Prototype_Simulator|Phase 2: Prototype Architecture & Stress Testing]]
