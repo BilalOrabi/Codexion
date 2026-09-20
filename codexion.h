@@ -6,7 +6,7 @@
 /*   By: borabi <bilal.orabi@learner.42.tech>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 21:42:39 by borabi            #+#    #+#             */
-/*   Updated: 2026/09/20 05:39:49 by borabi           ###   ########.fr       */
+/*   Updated: 2026/09/20 06:31:37 by borabi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,14 @@ int			min_heap_pop(t_min_heap *heap, t_coder *result);
 
 /* --- Parsing (parsing.c) --- */
 int			parse_arguments(int argc, char **argv, t_config *config);
+
+/* --- Logging (logger.c) --- */
+void		log_status(t_coder *coder, const char *status);
+
+/* --- Dongle Operations (dongle_ops.c) --- */
+int			init_dongles(t_engine *engine);
+void		destroy_dongles(t_engine *engine);
+void		take_dongles(t_coder *coder);
+void		drop_dongles(t_coder *coder);
 
 #endif

@@ -91,5 +91,16 @@
 ## Instructions for Resuming on Any Machine
 Whenever a new chat session starts:
 1. Read this `AGENTS.md` file and `Engineering Mentor Mode.md`.
-2. Inspect the current progress checkbox.
-3. Resume directly from the active lesson without skipping any steps or violating the Golden Rule.
+2. Inspect the current progress checkbox: **Phase 3, Step 3 (Deadlock-Free Dongle Arbitration)**.
+3. Active Work Items:
+   - **`logger.c`**:
+     - Pass address `&coder->engine->log_mutex` to `pthread_mutex_lock/unlock`.
+     - In `simulation_ended` check, ensure `"burned out"` is allowed through and sets `simulation_ended = 1`.
+   - **`dongle_ops.c`**:
+     - Fix loop bounds in `init_dongles` and `destroy_dongles` to `i < number_of_coders` (preventing heap buffer overflow).
+     - Fix `destroy_dongles` to call `free(engine->dongles)` *after* the destruction loop (preventing use-after-free).
+     - Complete `take_dongles(t_coder *coder)`:
+       - 1-coder edge case: lock left, log, sleep `time_to_burnout`, unlock, return.
+       - $N > 1$: lock lower ID dongle first, check cooldown (`ready_at_ms`), log `"has taken a dongle"`, lock second dongle, check cooldown, log.
+     - Complete `drop_dongles(t_coder *coder)`: set `ready_at_ms = get_time_ms() + cooldown` on both dongles, unlock both.
+4. Rule Reminder: Student writes 100% of logic by hand. AI mentor reviews, guides, and applies cosmetic 42 Norm formatting upon request after logic implementation.
