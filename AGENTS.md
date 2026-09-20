@@ -70,15 +70,12 @@
 - [x] **Lesson 5: Min-Heap / Priority Queue from Scratch in C**
   - *Mastered: Binary heap array representation, $O(\log N)$ insertion/extraction, deterministic tie-breaker handling without stdlib.*
 
-### Phase 2: The Prototype Simulator 📍 *(CURRENT STATUS)*
-- [ ] **Lightweight Integration Sandbox**:
-  - Implement 2–3 coders competing for shared dongles.
-  - Implement mandatory `dongle_cooldown` timer logic.
-  - Verification Gate: Zero deadlocks with ThreadSanitizer (`-fsanitize=thread`) and Helgrind.
+### Phase 2: The Prototype Simulator
+- [x] **Bypassed**: Proceeded directly to Production Engine architecture per student instruction.
 
-### Phase 3: The Codexion Production Engine
-- [ ] **Step 1: CLI Argument Parsing & Overflow Validation** (Strict validation of all 8 mandatory arguments).
-- [ ] **Step 2: Core Data Architecture** (Global-free clean `t_engine` and struct hierarchy).
+### Phase 3: The Codexion Production Engine 📍 *(CURRENT STATUS)*
+- [x] **Step 1: CLI Argument Parsing & Overflow Validation** (Strict validation of all 8 mandatory arguments).
+- [ ] **Step 2: Core Data Architecture** 📍 *(CURRENT STATUS)* (Global-free clean `t_engine` and struct hierarchy).
 - [ ] **Step 3: Deadlock-Free Dongle Arbitration** (Preventing Coffman circular wait conditions).
 - [ ] **Step 4: Scheduler Implementations** (`fifo` queue vs `edf` custom min-heap).
 - [ ] **Step 5: Coder State Machine Lifecycle** (`COMPILING`, `DEBUGGING`, `REFACTORING` state transitions).

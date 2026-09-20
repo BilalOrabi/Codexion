@@ -37,17 +37,15 @@ Foundational micro-experiments to master POSIX concurrency primitives in isolati
 
 ---
 
-### Phase 2: The Prototype Simulator 📍 *(CURRENT)*
-Small-scale integration sandbox (2–3 coders, dongle cooldowns, thread sanitizers).
-
-- [[Phase2_Prototype_Simulator|Phase 2: Prototype Architecture & Stress Testing]]
+### Phase 2: The Prototype Simulator (Bypassed)
+Small-scale integration sandbox (Bypassed to proceed directly to production engine).
 
 ---
 
-### Phase 3: The Codexion Main Engine
+### Phase 3: The Codexion Main Engine 📍 *(CURRENT)*
 The complete 42 compliant project implementation.
 
-- [[Project_Architecture|Step 1 & 2: CLI Parsing & Global-Free Engine Struct Architecture]]
+- [[Project_Architecture|Step 1: CLI Parsing (Completed) & Step 2: Global-Free Engine Struct Architecture]] 📍 *(CURRENT)*
 - [[Coffman_Conditions_and_Deadlocks|Step 3: Dongle Arbitration & Deadlock Elimination (Coffman Conditions)]]
 - [[Scheduler_Algorithms|Step 4: Custom Schedulers (FIFO vs EDF Priority Queue)]]
 - [[Coder_Lifecycle_State_Machine|Step 5: Coder State Machine (Compiling, Debugging, Refactoring)]]
