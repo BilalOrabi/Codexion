@@ -6,7 +6,7 @@
 /*   By: borabi <bilal.orabi@learner.42.tech>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 06:11:55 by borabi            #+#    #+#             */
-/*   Updated: 2026/09/21 07:44:44 by borabi           ###   ########.fr       */
+/*   Updated: 2026/09/21 08:19:30 by borabi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int init_dongles(t_engine *engine)
 void destroy_dongles(t_engine *engine)
 {
 	int i = 0;
-	while (i <= engine->config.number_of_coders)
+	while (i < engine->config.number_of_coders)
 	{
 		pthread_mutex_destroy(&engine->dongles[i].mutex);
 		i++;
@@ -44,17 +44,27 @@ void destroy_dongles(t_engine *engine)
 
 void take_dongles(t_coder *coder)
 {
+	t_dongle *first;
+	t_dongle *second;
+
 	if (coder->engine->config.number_of_coders == 1)
 	{
 		pthread_mutex_lock(&coder->left_dongle->mutex);
 		log_status(coder, "has taken a dongle");
 		precise_sleep(coder->engine->config.time_to_burnout);
 		pthread_mutex_unlock(&coder->left_dongle->mutex);
-		return ;
+		return;
 	}
-    if (coder->left_dongle->id < coder->right_dongle->id)
-        
-    
+	if (coder->left_dongle->id < coder->right_dongle->id)
+	{
+		first = coder->left_dongle;
+		second = coder->right_dongle;
+	}
+	else
+	{
+		first = coder->right_dongle;
+		second = coder->left_dongle;
+	}
 }
 
 void drop_dongles(t_coder *coder)
