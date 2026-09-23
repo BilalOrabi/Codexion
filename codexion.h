@@ -6,7 +6,7 @@
 /*   By: borabi <bilal.orabi@learner.42.tech>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 21:42:39 by borabi            #+#    #+#             */
-/*   Updated: 2026/09/20 06:31:37 by borabi           ###   ########.fr       */
+/*   Updated: 2026/09/23 08:19:07 by borabi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,12 @@ int			init_dongles(t_engine *engine);
 void		destroy_dongles(t_engine *engine);
 void		take_dongles(t_coder *coder);
 void		drop_dongles(t_coder *coder);
+
+/* --- Coder Lifecycle (coder.c) --- */
+int			is_simulation_ended(t_engine *engine);
+void		*coder_routine(void *arg);
+
+/* --- Monitor (monitor.c) --- */
+void		*monitor_routine(void *arg);
 
 #endif
