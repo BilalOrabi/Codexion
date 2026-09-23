@@ -76,14 +76,15 @@
 ### Phase 3: The Codexion Production Engine 📍 *(CURRENT STATUS)*
 - [x] **Step 1: CLI Argument Parsing & Overflow Validation** (Strict validation of all 8 mandatory arguments).
 - [x] **Step 2: Core Data Architecture** (Global-free clean `t_engine` and struct hierarchy).
-- [ ] **Step 3: Deadlock-Free Dongle Arbitration** 📍 *(CURRENT STATUS)* (Preventing Coffman circular wait conditions).
-- [ ] **Step 4: Scheduler Implementations** (`fifo` queue vs `edf` custom min-heap).
-- [ ] **Step 5: Coder State Machine Lifecycle** (`COMPILING`, `DEBUGGING`, `REFACTORING` state transitions).
-- [ ] **Step 6: Dedicated Real-Time Burnout Monitor** (Background monitor thread with `< 10ms` alert precision).
+- [x] **Step 3: Deadlock-Free Dongle Arbitration** (Preventing Coffman circular wait conditions).
+- [ ] **Step 4: Coder Thread Routine & State Machine Lifecycle** 📍 *(CURRENT STATUS)* (`COMPILING` -> `DEBUGGING` -> `REFACTORING` state transitions in `coder.c`).
+- [ ] **Step 5: Dedicated Real-Time Burnout Monitor** (Background monitor thread with `< 10ms` alert precision in `monitor.c`).
+- [ ] **Step 6: Master Engine Entry Point & Lifecycle** (Initialization, thread orchestration, clean teardown in `main.c`).
 - [ ] **Step 7: Final Submission Audit**:
   - `norminette` compliance (100% clean formatting, no forbidden functions).
   - Valgrind memory leak verification (0 bytes lost).
   - ThreadSanitizer stress test under heavy concurrency (e.g. 200 coders).
+  - Complete `README.md` per 42 specifications.
 
 
 ---
@@ -91,15 +92,9 @@
 ## Instructions for Resuming on Any Machine
 Whenever a new chat session starts:
 1. Read this file, `AGENTS.md`, and `Engineering Mentor Mode.md`.
-2. Inspect the current progress checkbox: **Phase 3, Step 3 (Deadlock-Free Dongle Arbitration)**.
+2. Inspect the current progress checkbox: **Phase 3, Step 4 (Coder Thread Routine & State Machine Lifecycle)**.
 3. Active Work Items:
+   - **`dongle_ops.c`**: Completed and 42 Norm compliant ✅.
    - **`logger.c`**: Completed and 42 Norm compliant ✅.
-   - **`dongle_ops.c`**:
-     - `init_dongles`: Completed ✅.
-     - `destroy_dongles`: Fix line 36 loop bound to `i < engine->config.number_of_coders` (currently `<=`).
-     - `take_dongles`: 1-coder case completed ✅. Finish the $N > 1$ block:
-       - Determine `first` and `second` (`left_dongle->id < right_dongle->id ? left : right`).
-       - Lock `first`, check cooldown (`get_time_ms() < first->ready_at_ms`), log `"has taken a dongle"`.
-       - Lock `second`, check cooldown, log `"has taken a dongle"`.
-     - `drop_dongles`: Completed ✅.
+   - **`coder.c`**: Next file to implement. Explain flow first per student instruction.
 4. Rule Reminder: Student writes 100% of logic by hand. AI mentor reviews, guides, and applies cosmetic 42 Norm formatting upon request after logic implementation.
