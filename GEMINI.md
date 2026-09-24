@@ -78,8 +78,8 @@
 - [x] **Step 2: Core Data Architecture** (Global-free clean `t_engine` and struct hierarchy).
 - [x] **Step 3: Deadlock-Free Dongle Arbitration** (Preventing Coffman circular wait conditions).
 - [x] **Step 4: Coder Thread Routine & State Machine Lifecycle** (`COMPILING` -> `DEBUGGING` -> `REFACTORING` state transitions in `coder.c`).
-- [ ] **Step 5: Dedicated Real-Time Burnout Monitor** 📍 *(CURRENT STATUS)* (Background monitor thread with `< 10ms` alert precision in `monitor.c`).
-- [ ] **Step 6: Master Engine Entry Point & Lifecycle** (Initialization, thread orchestration, clean teardown in `main.c`).
+- [x] **Step 5: Dedicated Real-Time Burnout Monitor** (Background monitor thread with `< 10ms` alert precision in `monitor.c`).
+- [ ] **Step 6: Master Engine Entry Point & Lifecycle** 📍 *(CURRENT STATUS)* (Initialization, thread orchestration, clean teardown in `main.c`).
 - [ ] **Step 7: Final Submission Audit**:
   - `norminette` compliance (100% clean formatting, no forbidden functions).
   - Valgrind memory leak verification (0 bytes lost).
@@ -92,14 +92,11 @@
 ## Instructions for Resuming on Any Machine
 Whenever a new chat session starts:
 1. Read this file, `AGENTS.md`, and `Engineering Mentor Mode.md`.
-2. Inspect the current progress checkbox: **Phase 3, Step 5 (Dedicated Real-Time Burnout Monitor)**.
+2. Inspect the current progress checkbox: **Phase 3, Step 6 (Master Engine Entry Point & Lifecycle)**.
 3. Active Work Items:
    - **`dongle_ops.c`**: Completed and 42 Norm compliant ✅.
    - **`logger.c`**: Completed and 42 Norm compliant ✅.
    - **`coder.c`**: Completed and 42 Norm compliant ✅.
-   - **`monitor.c`**: In progress 🛠️.
-     - Student drafted `check_coders_burnout` and started `check_all_compiled`.
-     - In `check_coders_burnout`: fix dot operator `engine->coders[i].last_compile_start`, use `>= engine->config.time_to_burnout`, add `i++`.
-     - In `check_all_compiled`: check all coders `compile_count >= required`, set `simulation_ended = 1` under `log_mutex` if all done.
-     - In `monitor_routine`: loop with `usleep(1000)` until `is_simulation_ended(engine)`.
+   - **`monitor.c`**: Completed and 42 Norm compliant ✅.
+   - **`main.c`**: Next file to implement. Explain flow first per student instruction.
 4. Rule Reminder: Student writes 100% of logic by hand. AI mentor reviews, guides, and applies cosmetic 42 Norm formatting upon request after logic implementation.
