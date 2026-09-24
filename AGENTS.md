@@ -79,8 +79,8 @@
 - [x] **Step 3: Deadlock-Free Dongle Arbitration** (Preventing Coffman circular wait conditions).
 - [x] **Step 4: Coder Thread Routine & State Machine Lifecycle** (`COMPILING` -> `DEBUGGING` -> `REFACTORING` state transitions in `coder.c`).
 - [x] **Step 5: Dedicated Real-Time Burnout Monitor** (Background monitor thread with `< 10ms` alert precision in `monitor.c`).
-- [ ] **Step 6: Master Engine Entry Point & Lifecycle** 📍 *(CURRENT STATUS)* (Initialization, thread orchestration, clean teardown in `main.c`).
-- [ ] **Step 7: Final Submission Audit**:
+- [x] **Step 6: Master Engine Entry Point & Lifecycle** (Initialization, thread orchestration, clean teardown in `main.c`).
+- [ ] **Step 7: Final Submission Audit** 📍 *(CURRENT STATUS)*:
   - `norminette` compliance (100% clean formatting, no forbidden functions).
   - Valgrind memory leak verification (0 bytes lost).
   - ThreadSanitizer stress test under heavy concurrency (e.g. 200 coders).
@@ -92,11 +92,13 @@
 ## Instructions for Resuming on Any Machine
 Whenever a new chat session starts:
 1. Read this `AGENTS.md` file and `Engineering Mentor Mode.md`.
-2. Inspect the current progress checkbox: **Phase 3, Step 6 (Master Engine Entry Point & Lifecycle)**.
+2. Inspect the current progress checkbox: **Phase 3, Step 7 (Final Submission Audit & README.md)**.
 3. Active Work Items:
    - **`dongle_ops.c`**: Completed and 42 Norm compliant ✅.
    - **`logger.c`**: Completed and 42 Norm compliant ✅.
    - **`coder.c`**: Completed and 42 Norm compliant ✅.
    - **`monitor.c`**: Completed and 42 Norm compliant ✅.
-   - **`main.c`**: Next file to implement. Explain flow first per student instruction.
+   - **`main.c`**: Completed and 42 Norm compliant ✅.
+   - **`Makefile`**: All sources linked and compiles binary cleanly ✅.
+   - **`README.md`**: Next file to write per 42 specifications.
 4. Rule Reminder: Student writes 100% of logic by hand. AI mentor reviews, guides, and applies cosmetic 42 Norm formatting upon request after logic implementation.

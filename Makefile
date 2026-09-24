@@ -17,7 +17,13 @@ CFLAGS		= -Wall -Wextra -Werror -pthread
 
 SRCS		= time.c \
 			  heap_utils.c \
-			  heap_ops.c
+			  heap_ops.c \
+			  parsing.c \
+			  logger.c \
+			  dongle_ops.c \
+			  coder.c \
+			  monitor.c \
+			  main.c
 
 OBJS		= $(SRCS:.c=.o)
 
