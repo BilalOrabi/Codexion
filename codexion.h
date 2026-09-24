@@ -6,7 +6,7 @@
 /*   By: borabi <bilal.orabi@learner.42.tech>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 21:42:39 by borabi            #+#    #+#             */
-/*   Updated: 2026/09/23 08:19:07 by borabi           ###   ########.fr       */
+/*   Updated: 2026/09/24 13:21:46 by borabi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,22 @@ typedef struct s_config
 	t_scheduler	scheduler;
 }	t_config;
 
-struct	s_engine;
+typedef struct s_dongle	t_dongle;
+typedef struct s_coder	t_coder;
+typedef struct s_engine	t_engine;
 
+typedef struct s_min_heap
+{
+	t_coder			*request_array;
+	int				current_size;
+	int				maximum_capacity;
+}	t_min_heap;
 typedef struct s_dongle
 {
 	int				id;
 	pthread_mutex_t	mutex;
+	pthread_cond_t	cond;
+	t_min_heap		queue;
 	int				is_in_use;
 	long long		ready_at_ms;
 }	t_dongle;
@@ -72,13 +82,6 @@ typedef struct s_engine
 	t_dongle		*dongles;
 	t_coder			*coders;
 }	t_engine;
-
-typedef struct s_min_heap
-{
-	t_coder			*request_array;
-	int				current_size;
-	int				maximum_capacity;
-}	t_min_heap;
 
 /* --- Time & Sleep Functions (time.c) --- */
 long long	get_time_ms(void);

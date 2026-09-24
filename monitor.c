@@ -6,7 +6,7 @@
 /*   By: borabi <bilal.orabi@learner.42.tech>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 08:19:18 by borabi            #+#    #+#             */
-/*   Updated: 2026/09/24 06:31:45 by borabi           ###   ########.fr       */
+/*   Updated: 2026/09/24 12:53:55 by borabi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ static int	check_coders_burnout(t_engine *engine)
 	i = 0;
 	while (i < engine->config.number_of_coders)
 	{
+		pthread_mutex_lock(&engine->state_mutex);
 		elapsed = get_time_ms() - engine->coders[i].last_compile_start;
+		pthread_mutex_unlock(&engine->state_mutex);
 		if (elapsed >= engine->config.time_to_burnout)
 		{
 			log_status(&engine->coders[i], "burned out");
@@ -41,9 +43,14 @@ static int	check_all_compiled(t_engine *engine)
 	i = 0;
 	while (i < engine->config.number_of_coders)
 	{
+		pthread_mutex_lock(&engine->state_mutex);
 		if (engine->coders[i].compile_count
 			< engine->config.number_of_compiles_required)
+		{
+			pthread_mutex_unlock(&engine->state_mutex);
 			return (0);
+		}
+		pthread_mutex_unlock(&engine->state_mutex);
 		i++;
 	}
 	pthread_mutex_lock(&engine->log_mutex);

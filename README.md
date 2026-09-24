@@ -1,23 +1,11 @@
 *This activity has been created as part of the 42 curriculum by borabi.*
 
-# Codexion: High-Performance Concurrent Resource Synchronization Engine
+# Codexion
 
-A high-performance POSIX multi-threaded simulation engine written in C according to strict 42 Norm compliance. `codexion` models concurrent developers competing for limited shared hardware USB dongles in a circular co-working space, orchestrating state transitions (`COMPILING` $\rightarrow$ `DEBUGGING` $\rightarrow$ `REFACTORING`), enforcing hardware cooldown timers, eliminating deadlocks, and detecting thread burnout with sub-10ms precision.
+A high-performance POSIX multi-threaded simulation engine written in C `codexion` models concurrent developers competing for limited shared hardware USB dongles in a circular co-working space, orchestrating state transitions (`COMPILING` $\rightarrow$ `DEBUGGING` $\rightarrow$ `REFACTORING`), enforcing hardware cooldown timers, eliminating deadlocks, and detecting thread burnout with sub-10ms precision.
 
----
 
-## Table of Contents
-- [1. Description](#1-description)
-- [2. Instructions (Compilation & Usage)](#2-instructions-compilation--usage)
-- [3. Architecture & Engine Design](#3-architecture--engine-design)
-- [4. Blocking Cases Handled](#4-blocking-cases-handled)
-- [5. Thread Synchronization Mechanisms](#5-thread-synchronization-mechanisms)
-- [6. Resources & AI Usage Declaration](#6-resources--ai-usage-declaration)
-- [7. Peer Evaluation Testing Suite](#7-peer-evaluation-testing-suite)
-
----
-
-## 1. Description
+## Description
 
 In collaborative high-performance environments, access to scarce development resources (such as specialized quantum hardware dongles) creates synchronization bottlenecks. In `codexion`:
 - $N$ coder threads sit in a circular ring.
@@ -30,7 +18,7 @@ In collaborative high-performance environments, access to scarce development res
 
 ---
 
-## 2. Instructions (Compilation & Usage)
+## Instructions (Compilation & Usage)
 
 ### Compilation
 The project includes a Makefile that compiles all source files with `cc -Wall -Wextra -Werror -pthread` without relinking:
@@ -68,7 +56,7 @@ The executable takes exactly 8 mandatory arguments:
 
 ---
 
-## 3. Architecture & Engine Design
+## Architecture & Engine Design
 
 ### Master Context Struct Hierarchy (`t_engine`)
 To obey the strict 42 mandate forbidding global variables, the entire runtime state is encapsulated in a central `t_engine` context allocated in stack memory and passed via pointer indirection:
@@ -126,7 +114,7 @@ stateDiagram-v2
 
 ---
 
-## 4. Blocking Cases Handled
+## Blocking Cases Handled
 
 ### A. Deadlock Prevention & Coffman Condition Elimination
 A deadlock requires all four **Coffman Conditions** to hold simultaneously:
@@ -179,7 +167,7 @@ All console output is serialized through `log_status()` protected by `engine->lo
 
 ---
 
-## 5. Thread Synchronization Mechanisms
+## Thread Synchronization Mechanisms
 
 | Primitive | Mechanism | Role in Codexion |
 | :--- | :--- | :--- |
@@ -196,7 +184,7 @@ All console output is serialized through `log_status()` protected by `engine->lo
 
 ---
 
-## 6. Resources & AI Usage Declaration
+## Resources & AI Usage Declaration
 
 ### References & Documentation
 - **POSIX Threads Programming**: IEEE Std 1003.1 POSIX.1-2017 Specification.
@@ -204,8 +192,8 @@ All console output is serialized through `log_status()` protected by `engine->lo
 - **Dijkstra, E. W. (1971)**: *Hierarchical ordering of sequential processes* (Resource hierarchy solution to the Dining Philosophers Problem).
 - **Coffman, E. G., Elphick, M., & Shoshani, A. (1971)**: *System Deadlocks*, Computing Surveys.
 
-### AI Usage Disclosure (42 Guidelines Compliance)
-In strict compliance with 42 School guidelines (Chapter 2 of the Codexion subject), artificial intelligence was used as an **interactive senior engineering mentor and pair-programming sounding board**:
+### AI Usage Disclosure
+ artificial intelligence was used as an **interactive senior engineering mentor and pair-programming sounding board**:
 - **100% Student Code Ownership**: All architectural logic, algorithms, state machines, and data structures (`parsing.c`, `time.c`, `logger.c`, `dongle_ops.c`, `coder.c`, `monitor.c`, `main.c`, `heap_ops.c`, `heap_utils.c`) were designed and handwritten by the student.
 - **AI Mentorship Role**:
   1. Conceptual explanations of operating system internals (futexes, CPU timeslices, memory bus contention, Coffman conditions).
@@ -214,37 +202,3 @@ In strict compliance with 42 School guidelines (Chapter 2 of the Codexion subjec
 
 ---
 
-## 7. Peer Evaluation Testing Suite
-
-Run these standard verification scenarios during peer defense:
-
-### Test 1: Single Coder Edge Case (Must Burn Out in `< 10ms`)
-```bash
-./codexion 1 800 200 200 200 5 0 fifo
-```
-- **Expected Behavior**: Coder 1 takes 1 dongle, waits, and burns out at $\approx 800\text{ms}$ ($\pm 8\text{ms}$). Simulation stops cleanly.
-
-### Test 2: Standard Survival & Compile Quota
-```bash
-./codexion 4 600 100 100 100 3 0 fifo
-```
-- **Expected Behavior**: No coders burn out. All 4 coders compile 3 times each. Simulation terminates cleanly after all goals are met.
-
-### Test 3: Hardware Dongle Cooldown
-```bash
-./codexion 4 800 100 100 100 2 50 fifo
-```
-- **Expected Behavior**: Released dongles wait exactly $50\text{ms}$ cooldown before neighboring coders are permitted to compile.
-
-### Test 4: Heavy Concurrency (Stress Test)
-```bash
-./codexion 200 600 200 200 200 5 0 fifo
-```
-- **Expected Behavior**: 200 concurrent threads run smoothly without deadlocks, segfaults, or data races.
-
-### Test 5: Input Validation & Error Handling
-```bash
-./codexion 4 800 200 200 200 -1 0 fifo          # Rejects negative compile count (Exit 1)
-./codexion 4 800 200 200 200 5 0 invalid_sched  # Rejects invalid scheduler (Exit 1)
-./codexion 0 800 200 200 200 5 0 fifo           # Rejects 0 coders (Exit 1)
-```
