@@ -15,7 +15,17 @@ lab04_cond_vars
 lab05_heap
 !*.c
 !*.h
-!*.md
+!README.md
+
+# Local Workspace, Labs & Mentorship Documentation
+.vscode/
+docs/
+labs/
+AGENTS.md
+GEMINI.md
+Engineering Mentor Mode.md
+Codexion.pdf
+post.txt
 
 # Object & Library Files
 *.o
