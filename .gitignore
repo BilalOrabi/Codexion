@@ -8,11 +8,6 @@
 *.app
 a.out
 codexion
-lab01_threads
-lab02_mutexes
-lab03_clocks
-lab04_cond_vars
-lab05_heap
 !*.c
 !*.h
 !README.md
